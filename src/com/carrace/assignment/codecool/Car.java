@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Random;
 
-class Car {
+public class Car {
 
     private String name;
     private int normalSpeed;
     private int distanceTraveled;
 
-    Car (){
+    public Car (){
 
         List<String> primNameList = Arrays.asList("Sanctuary", "Falcon", "Triumph", "Lightning",
                 "Aurora", "Spire", "Formula", "Motion", "Paladin", "Epitome");
