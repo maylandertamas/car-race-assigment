@@ -11,7 +11,7 @@ class Car {
     private int normalSpeed;
     private int distanceTraveled;
 
-    public Car (){
+    Car (){
 
         List<String> primNameList = Arrays.asList("Sanctuary", "Falcon", "Triumph", "Lightning",
                 "Aurora", "Spire", "Formula", "Motion", "Paladin", "Epitome");
@@ -38,10 +38,6 @@ class Car {
         return normalSpeed;
     }
 
-    void setDistanceTraveled(int distance) {
-        distanceTraveled = distance;
-    }
-
     int getDistanceTraveled() {
         return distanceTraveled;
     }
@@ -55,7 +51,7 @@ class Car {
         if (chanteToLimit <= 30) {
             return limit;
         } else {
-            return new Random().nextInt(110 - 80 + 1) + 80;
+            return new Random().nextInt(31) + 80;
         }
     }
 }

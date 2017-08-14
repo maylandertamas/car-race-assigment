@@ -17,7 +17,11 @@ public class Main {
     asd.moveForAnHour();
     asd.setNormalSpeed(Car.speedLimit(70));
     asd.moveForAnHour();
-    System.out.println(asd.getDistanceTraveled());
+    //System.out.println(asd.getDistanceTraveled());
+    Motorcycle a = new Motorcycle();
+    Motorcycle b = new Motorcycle();
+    b.raining();
+        //System.out.println(b.getSpeed());
     }
 
 }
