@@ -13,7 +13,7 @@ public class Main {
     */
 	Car asd = new Car();
 	asd.setNormalSpeed(Car.speedLimit(70));
-	System.out.println(asd.getNormalSpeed());
+	//System.out.println(asd.getNormalSpeed());
     asd.moveForAnHour();
     asd.setNormalSpeed(Car.speedLimit(70));
     asd.moveForAnHour();
@@ -21,7 +21,7 @@ public class Main {
     Motorcycle a = new Motorcycle();
     Motorcycle b = new Motorcycle();
     b.raining();
-        //System.out.println(b.getSpeed());
+        System.out.println(b.getSpeed());
     }
 
 }

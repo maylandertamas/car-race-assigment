@@ -34,7 +34,7 @@ public class Motorcycle {
     }
 
     void raining() {
-        int speedReduce = new Random().nextInt(46) + 5;;
+        int speedReduce = new Random().nextInt(46) + 5;
         speed -= speedReduce;
     }
 }
