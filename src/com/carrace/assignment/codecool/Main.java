@@ -3,25 +3,20 @@ package com.carrace.assignment.codecool;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-
+import java.util.Comparator;
 
 public class Main {
 
-    static List<Car> carList = new ArrayList<>();
-    static List<Motorcycle> motorcycleList = new ArrayList<>();
-    static List<Truck> truckList = new ArrayList<>();
-
     static boolean isRaining() {
-        int chanceToRain = new Random().nextInt(101);
-        if (chanceToRain <= 30) {
+        int chanceToRain = new Random().nextInt(100);
+        if (chanceToRain <= 29) {
             return true;
         } else {
             return false;
         }
     }
 
-    static void createVehicles() {
+    static void createVehicles(List<Car> carList, List<Motorcycle> motorcycleList, List<Truck> truckList) {
         for (int i = 0; i < 10; i++) {
             carList.add(new Car());
             motorcycleList.add(new Motorcycle());
@@ -29,37 +24,80 @@ public class Main {
         }
     }
 
-    public static void simulateRace(List<Car> carList, List<Motorcycle> motorcycleList, List<Truck> truckList) {
-        for (int a = 0; a < 1; a++) {
+    static void simulateRace(List<Car> carList, List<Motorcycle> motorcycleList, List<Truck> truckList) {
+        for (int a = 0; a < 50; a++) {
+
+            // Simulate cars (with the chance of speed limit)
             carList.stream().forEach(p -> p.setNormalSpeed(Car.speedLimit(70)));
             carList.stream().forEach(k -> k.moveForAnHour());
+
+            // Simulate motorcycles (with the chance of rain)
+            if (isRaining()) {
+                motorcycleList.stream().forEach(p -> p.raining());
+                motorcycleList.stream().forEach(k -> k.moveForAnHour());
+            } else {
+                motorcycleList.stream().forEach(p -> p.setDefaultSpeed());
+                motorcycleList.stream().forEach(k -> k.moveForAnHour());
+            }
+
+            // Simulate trucks (with the chance of breakdown)
+            truckList.stream().forEach(k -> k.moveForAnHour());
         }
     }
 
+    static void printRaceResults(List<Car> carList, List<Motorcycle> motorcycleList, List<Truck> truckList) {
+
+        List<List<String>> resultList = new ArrayList<>();
+
+        // add every car's details as a list to resultList
+        for (Car car : carList) {
+            List<String> temp = new ArrayList<>();
+            String stringifiedTravelledDistance = new Integer(car.getDistanceTraveled()).toString();
+
+            temp.add(car.getName());
+            temp.add(stringifiedTravelledDistance);
+            temp.add(car.getType());
+            resultList.add(temp);
+        }
+
+        // add every motorcycle's details as a list to resultList
+        for (Motorcycle motorcycle : motorcycleList) {
+            List<String> temp = new ArrayList<>();
+            String stringifiedTravelledDistance = new Integer(motorcycle.getDistanceTraveled()).toString();
+
+            temp.add(motorcycle.getName());
+            temp.add(stringifiedTravelledDistance);
+            temp.add(motorcycle.getType());
+
+            resultList.add(temp);
+        }
+
+        // add every truck's details as a list to resultList
+        for (Truck truck: truckList) {
+            List<String> temp = new ArrayList<>();
+            String stringifiedTravelledDistance = new Integer(truck.getDistanceTraveled()).toString();
+
+            temp.add(truck.getName());
+            temp.add(stringifiedTravelledDistance);
+            temp.add(truck.getType());
+
+            resultList.add(temp);
+        }
+
+        resultList.sort(Comparator.comparing(l -> Integer.valueOf(l.get(1))));
+        System.out.println(resultList);
+    }
+
     public static void main(String[] args) {
-        createVehicles();
+
+        List<Car> carList = new ArrayList<>();
+        List<Motorcycle> motorcycleList = new ArrayList<>();
+        List<Truck> truckList = new ArrayList<>();
+
+        createVehicles(carList, motorcycleList, truckList);
         simulateRace(carList, motorcycleList, truckList);
 
-        List<Integer> trv = carList.stream().map(p -> p.getDistanceTraveled()).collect(Collectors.toList());
-        //List<String> af = carList.stream().map(p -> p.getName()).collect(Collectors.toList());
-        System.out.println(trv);
-
-
-        /*simulateRace() // simulates the race by calling moveForAnHour() on every vehicle 50 times and setting whether its raining.
-    printRaceResults() // prints each vehicle's name, distance traveled ant type.
-    */
-
-	/*Car asd = new Car();
-	asd.setNormalSpeed(Car.speedLimit(70));
-	//System.out.println(asd.getNormalSpeed());
-    asd.moveForAnHour();
-    asd.setNormalSpeed(Car.speedLimit(70));
-    asd.moveForAnHour();
-    //System.out.println(asd.getDistanceTraveled());
-    Motorcycle a = new Motorcycle();
-    Motorcycle b = new Motorcycle();
-    b.raining();
-        System.out.println(b.getSpeed());*/
+        printRaceResults(carList, motorcycleList, truckList);
     }
 
 }

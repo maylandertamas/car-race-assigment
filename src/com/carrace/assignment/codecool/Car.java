@@ -10,6 +10,7 @@ public class Car {
     private String name;
     private int normalSpeed;
     private int distanceTraveled;
+    private String type;
 
     public Car (){
 
@@ -23,6 +24,7 @@ public class Car {
 
         this.normalSpeed = 0;
         this.distanceTraveled = 0;
+        this.type = "Car";
 
     }
 
@@ -30,16 +32,16 @@ public class Car {
         return name;
     }
 
-    void setNormalSpeed(int speed) {
-        normalSpeed = speed;
-    }
-
-    int getNormalSpeed() {
-        return normalSpeed;
-    }
-
     int getDistanceTraveled() {
         return distanceTraveled;
+    }
+
+    String getType() {
+        return type;
+    }
+
+    void setNormalSpeed(int speed) {
+        normalSpeed = speed;
     }
 
     void moveForAnHour() {
@@ -47,8 +49,8 @@ public class Car {
     }
 
     static int speedLimit(int limit) {
-        int chanteToLimit = new Random().nextInt(101);
-        if (chanteToLimit <= 30) {
+        int chanteToLimit = new Random().nextInt(100);
+        if (chanteToLimit <= 29) {
             return limit;
         } else {
             return new Random().nextInt(31) + 80;
